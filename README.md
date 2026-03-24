@@ -23,7 +23,7 @@ When invoked, the skill interactively creates a complete Next.js project with:
 
 ```bash
 claude plugin marketplace add https://github.com/Strapazzon/skill-nextjs-starter
-claude plugin install nextjs-starter@strapazzon-skills
+claude plugin install nextjs-starter@strapazzon
 ```
 
 ### Option 2: Add as a local plugin (development)
