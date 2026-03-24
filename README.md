@@ -13,20 +13,27 @@ When invoked, the skill interactively creates a complete Next.js project with:
 - **Hybrid folder structure** — layer-based for global code, feature-based for domain
 - **CLAUDE.md** with rigid architecture rules for all future Claude sessions
 - **.mcp.json** with Context7 and optional MCPs
+- **`.nvmrc`** + `engines` in package.json with current Node.js version
+- **Auto-install** — detects if pnpm/bun is missing and offers to install it
 - Optional extras: husky, commitlint + commitizen (Conventional Commits), .editorconfig, VS Code settings, .env.example
 
 ## Installation
 
-### Option 1: Add as a local plugin (development)
+### Option 1: From marketplace (recommended)
+
+Add the marketplace and install the plugin:
 
 ```bash
-claude plugins add /path/to/skill-nextjs-starter
+claude plugin marketplace add https://github.com/Strapazzon/skill-nextjs-starter
+claude plugin install nextjs-starter@strapazzon-skills
 ```
 
-### Option 2: Add from GitHub
+### Option 2: Local plugin (development)
+
+Run Claude Code with the plugin directory:
 
 ```bash
-claude plugins add github:Strapazzon/skill-nextjs-starter
+claude --plugin-dir /path/to/skill-nextjs-starter
 ```
 
 After installing, restart Claude Code. The skill will be available automatically.
@@ -49,13 +56,15 @@ The skill will guide you through 4 questions:
 
 Then it automatically:
 
-1. Runs `create-next-app` with the right flags
-2. Configures shadcn/ui, Prettier, ESLint
-3. Sets up the folder structure
-4. Writes `CLAUDE.md` with architecture rules
-5. Writes `.mcp.json` with your MCP choices
-6. Verifies the build and lint pass
-7. Creates the initial git commit
+1. Verifies the package manager is available (installs if needed)
+2. Runs `create-next-app` with the right flags
+3. Creates `.nvmrc` and sets `engines` in `package.json`
+4. Configures shadcn/ui, Prettier, ESLint
+5. Sets up the folder structure
+6. Writes `CLAUDE.md` with architecture rules
+7. Writes `.mcp.json` with your MCP choices
+8. Verifies the build and lint pass
+9. Creates the initial git commit
 
 ## Project structure generated
 
@@ -100,14 +109,15 @@ The generated `CLAUDE.md` instructs Claude to use these skills when working on t
 
 - [Claude Code](https://claude.com/claude-code) CLI installed
 - Node.js 18+
-- One of: pnpm, npm, or bun
+- npm (pnpm/bun will be auto-installed if missing)
 
 ## Plugin structure
 
 ```
 skill-nextjs-starter/
 ├── .claude-plugin/
-│   └── plugin.json         # Plugin metadata
+│   ├── plugin.json         # Plugin metadata
+│   └── marketplace.json    # Marketplace manifest
 ├── skills/
 │   └── nextjs-starter/
 │       └── SKILL.md        # The skill (all logic lives here)
