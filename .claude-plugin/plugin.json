@@ -1,7 +1,7 @@
 {
   "name": "nextjs-starter",
-  "description": "Scaffold production-ready Next.js projects with App Router, TypeScript, Tailwind 4, shadcn/ui, and opinionated architecture",
+  "description": "Scaffold production-ready Next.js projects with App Router, TypeScript, Tailwind 4, and opinionated architecture",
   "author": {
-    "name": "Getulio"
+    "name": "Getúlio Strapazzon"
   }
 }
