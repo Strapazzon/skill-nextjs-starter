@@ -301,3 +301,83 @@ touch src/components/shared/.gitkeep src/features/.gitkeep src/hooks/.gitkeep sr
 ```
 
 Note: `src/components/ui/` and `src/lib/utils.ts` already exist — they were created by `shadcn init` in Phase 3. Do not recreate or modify them.
+
+---
+
+## Phase 5: Rules Files
+
+### CLAUDE.md
+
+Write `CLAUDE.md` at the project root with the following content, substituting `{PROJECT_NAME}`, `{PM}`, `{PM_RUN}`, and `{PM_DLX}`:
+
+````markdown
+# {PROJECT_NAME}
+
+## Stack
+Next.js (App Router), TypeScript, Tailwind 4, shadcn/ui, {PM}
+
+## Architecture Rules
+
+### Folder Structure
+- `app/` - ONLY routes, layouts, loading, error. Zero business logic
+- `components/ui/` - Managed by shadcn CLI. NEVER create/edit manually
+- `components/shared/` - Reusable components, ALWAYS composed from ui/
+- `features/<name>/` - Self-contained: components/, hooks/, lib/, types/
+- `lib/` - Pure functions, clients, configs. No React components
+- `hooks/` - Global hooks. Feature hooks live in features/<name>/hooks/
+- `types/` - Types shared between features
+
+### Component Rules
+- Every visual component MUST use primitives from components/ui/
+- NEVER use native <button>, <input>, <select> - use shadcn
+- Add new ui components: `{PM_DLX} shadcn@latest add <name>`
+- Components MUST be reusable. Extract when used 2+ times
+- Props typed with interfaces, never any
+
+### Code Rules
+- Path aliases: use @/ for all imports (never ../../../)
+- Exports: named exports only (never default export except pages)
+- Server Components by default. Use "use client" only when necessary
+- Pure functions in lib/. Side effects isolated in hooks
+
+## Required Skills
+- USE superpowers:brainstorming BEFORE creating any new feature
+- USE frontend-design when creating visual components and pages
+- USE superpowers:writing-plans for features touching more than 2 files
+- USE superpowers:verification-before-completion before declaring tasks done
+
+## Commands
+- `{PM_RUN} dev` - dev server
+- `{PM_RUN} build` - production build
+- `{PM_RUN} lint` - ESLint
+- `{PM_RUN} format` - Prettier
+````
+
+### .mcp.json
+
+Write `.mcp.json` at the project root. Context7 is always included:
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+For each MCP in `MCPS`, extend `mcpServers`:
+
+- **figma** (if `figma` in MCPS): add entry:
+  ```json
+  "figma": {
+    "command": "npx",
+    "args": ["-y", "@anthropic-ai/figma-mcp@latest"]
+  }
+  ```
+
+- **browser_preview** (if `browser_preview` in MCPS): inform the user that Browser Preview is configured in Claude Code settings, not in `.mcp.json`. No entry needed here.
+
+- **other** (if `other` in MCPS): use the command/args captured from the follow-up question in Q4 and add the entry to `.mcp.json`.
