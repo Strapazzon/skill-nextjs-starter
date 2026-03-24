@@ -288,3 +288,16 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 DATABASE_URL=
 NEXT_PUBLIC_API_URL=
 ```
+
+---
+
+## Phase 4: Folder Structure
+
+Run these commands to create the project layout:
+
+```bash
+mkdir -p src/components/shared src/features src/hooks src/lib src/types
+touch src/components/shared/.gitkeep src/features/.gitkeep src/hooks/.gitkeep src/types/.gitkeep
+```
+
+Note: `src/components/ui/` and `src/lib/utils.ts` already exist — they were created by `shadcn init` in Phase 3. Do not recreate or modify them.
