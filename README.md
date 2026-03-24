@@ -26,7 +26,7 @@ claude plugins add /path/to/skill-nextjs-starter
 ### Option 2: Add from GitHub
 
 ```bash
-claude plugins add github:your-username/skill-nextjs-starter
+claude plugins add github:Strapazzon/skill-nextjs-starter
 ```
 
 After installing, restart Claude Code. The skill will be available automatically.
