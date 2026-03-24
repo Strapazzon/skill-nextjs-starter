@@ -1,5 +1,6 @@
 {
   "name": "nextjs-starter",
+  "version": "1.0.0",
   "description": "Scaffold production-ready Next.js projects with App Router, TypeScript, Tailwind 4, and opinionated architecture",
   "author": {
     "name": "Getúlio Strapazzon"

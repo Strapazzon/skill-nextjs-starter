@@ -1,0 +1,17 @@
+{
+  "name": "strapazzon-skills",
+  "owner": {
+    "name": "Getúlio Strapazzon"
+  },
+  "plugins": [
+    {
+      "name": "nextjs-starter",
+      "description": "Scaffold production-ready Next.js projects with App Router, TypeScript, Tailwind 4, and opinionated architecture",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Strapazzon/skill-nextjs-starter.git"
+      },
+      "category": "development"
+    }
+  ]
+}
