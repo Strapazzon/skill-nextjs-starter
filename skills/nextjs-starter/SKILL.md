@@ -128,3 +128,163 @@ Keep only Tailwind directives and CSS variables. Remove all other default styles
 ### 4. Remove default images from `public/`
 
 Delete any default images (e.g., `next.svg`, `vercel.svg`) from the `public/` directory.
+
+---
+
+## Phase 3: Configuration
+
+### Core Configuration
+
+#### shadcn/ui
+
+Initialize shadcn/ui (choose style: default, base color: neutral, CSS variables: yes):
+
+```bash
+{PM_DLX} shadcn@latest init
+```
+
+Add the button component:
+
+```bash
+{PM_DLX} shadcn@latest add button
+```
+
+#### Prettier
+
+Install Prettier and the Tailwind plugin:
+
+```bash
+{PM} add -D prettier prettier-plugin-tailwindcss
+```
+
+Write `.prettierrc`:
+
+```json
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "printWidth": 80,
+  "plugins": ["prettier-plugin-tailwindcss"]
+}
+```
+
+Add a `format` script to `package.json`:
+
+```json
+"format": "prettier --write ."
+```
+
+#### TypeScript
+
+Verify `tsconfig.json` has `"strict": true` and the `@/*` path alias. create-next-app generates these — just confirm they are present.
+
+#### ESLint
+
+Detect the ESLint config format:
+- Next.js 15+ uses flat config: `eslint.config.mjs`
+- Older versions use legacy: `.eslintrc.json`
+
+Extend the detected config with import ordering rules.
+
+#### Tailwind
+
+Detect Tailwind version:
+- **v4**: CSS-based config — `@theme` block lives in `globals.css`. Configure the shadcn theme there.
+- **v3**: File-based config — `tailwind.config.ts`. Configure the shadcn theme in that file.
+
+---
+
+### Conditional Extras
+
+Apply only the extras present in `EXTRAS`.
+
+#### husky + lint-staged (if `husky` in EXTRAS)
+
+Detect husky version and initialize accordingly:
+- v9+: `{PM_DLX} husky init`
+- v8: `{PM_DLX} husky-init`
+
+Configure `.husky/pre-commit` to run:
+
+```bash
+{PM_DLX} lint-staged
+```
+
+Write `.lintstagedrc.json`:
+
+```json
+{
+  "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.{json,md,css}": ["prettier --write"]
+}
+```
+
+#### commitlint (if `commitlint` in EXTRAS)
+
+```bash
+{PM} add -D @commitlint/cli @commitlint/config-conventional
+```
+
+Write `commitlint.config.js`:
+
+```js
+module.exports = { extends: ['@commitlint/config-conventional'] };
+```
+
+If `husky` is also selected, add a `commit-msg` hook that runs `commitlint`.
+
+#### .editorconfig (if `editorconfig` in EXTRAS)
+
+Write `.editorconfig`:
+
+```ini
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+```
+
+#### VS Code (if `vscode` in EXTRAS)
+
+Write `.vscode/settings.json`:
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "css.validate": false,
+  "tailwindCSS.experimental.classRegex": []
+}
+```
+
+Write `.vscode/extensions.json`:
+
+```json
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}
+```
+
+#### .env.example (if `env_example` in EXTRAS)
+
+Write `.env.example`:
+
+```
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+DATABASE_URL=
+NEXT_PUBLIC_API_URL=
+```
