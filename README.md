@@ -19,18 +19,14 @@ When invoked, the skill interactively creates a complete Next.js project with:
 
 ## Installation
 
-### Option 1: From marketplace (recommended)
-
-Add the marketplace and install the plugin:
+### Option 1: Add from GitHub
 
 ```bash
 claude plugin marketplace add https://github.com/Strapazzon/skill-nextjs-starter
 claude plugin install nextjs-starter@strapazzon-skills
 ```
 
-### Option 2: Local plugin (development)
-
-Run Claude Code with the plugin directory:
+### Option 2: Add as a local plugin (development)
 
 ```bash
 claude --plugin-dir /path/to/skill-nextjs-starter
