@@ -381,3 +381,58 @@ For each MCP in `MCPS`, extend `mcpServers`:
 - **browser_preview** (if `browser_preview` in MCPS): inform the user that Browser Preview is configured in Claude Code settings, not in `.mcp.json`. No entry needed here.
 
 - **other** (if `other` in MCPS): use the command/args captured from the follow-up question in Q4 and add the entry to `.mcp.json`.
+
+---
+
+## Phase 6: Verification + Initial Commit
+
+### 1. Build check
+
+```bash
+{PM_RUN} build
+```
+
+If it fails, read the error output, fix the issues, and retry. Maximum 3 attempts. Stop and report to the user if it still fails after 3 attempts.
+
+### 2. Lint check
+
+```bash
+{PM_RUN} lint
+```
+
+If it fails, read the error output, fix the issues, and retry. Maximum 3 attempts. Stop and report to the user if it still fails after 3 attempts.
+
+### 3. Initial git commit
+
+Initialize a git repo if one does not already exist:
+
+```bash
+git init
+```
+
+Stage all files and create the initial commit:
+
+```bash
+git add .
+git commit -m "feat: scaffold project with Next.js, Tailwind 4, shadcn/ui
+
+- App Router with TypeScript strict mode
+- shadcn/ui component library (Radix + Tailwind)
+- Prettier + ESLint configured
+- Opinionated folder structure (hybrid: layer + feature)
+- CLAUDE.md with architecture rules
+- MCP configuration (Context7 + extras)"
+```
+
+### 4. Print summary
+
+```
+Project {PROJECT_NAME} created successfully.
+- X files generated
+- Build: OK | Lint: OK
+- Extras: {list of extras}
+- MCPs: {list of MCPs}
+- Initial commit created
+
+Next step: cd {PROJECT_NAME} && {PM_RUN} dev
+```
