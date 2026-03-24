@@ -221,16 +221,32 @@ Write `.lintstagedrc.json`:
 }
 ```
 
-#### commitlint (if `commitlint` in EXTRAS)
+#### commitlint + commitizen (if `commitlint` in EXTRAS)
 
 ```bash
-{PM} add -D @commitlint/cli @commitlint/config-conventional
+{PM} add -D @commitlint/cli @commitlint/config-conventional commitizen cz-conventional-changelog
 ```
 
 Write `commitlint.config.js`:
 
 ```js
 module.exports = { extends: ['@commitlint/config-conventional'] };
+```
+
+Add commitizen config to `package.json`:
+
+```json
+"config": {
+  "commitizen": {
+    "path": "cz-conventional-changelog"
+  }
+}
+```
+
+Add a `commit` script to `package.json`:
+
+```json
+"commit": "cz"
 ```
 
 If `husky` is also selected, add a `commit-msg` hook that runs `commitlint`.
@@ -340,6 +356,14 @@ Next.js (App Router), TypeScript, Tailwind 4, shadcn/ui, {PM}
 - Server Components by default. Use "use client" only when necessary
 - Pure functions in lib/. Side effects isolated in hooks
 
+### Commit Messages (Conventional Commits)
+- Format: `<type>(<scope>): <description>`
+- Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+- Scope is optional but recommended (e.g., `feat(auth): add login page`)
+- Description: imperative mood, lowercase, no period at end
+- Breaking changes: add `!` after type/scope (e.g., `feat!: remove legacy API`)
+- Use `{PM_RUN} commit` for interactive commit wizard (commitizen)
+
 ## Required Skills
 - USE superpowers:brainstorming BEFORE creating any new feature
 - USE frontend-design when creating visual components and pages
@@ -351,6 +375,7 @@ Next.js (App Router), TypeScript, Tailwind 4, shadcn/ui, {PM}
 - `{PM_RUN} build` - production build
 - `{PM_RUN} lint` - ESLint
 - `{PM_RUN} format` - Prettier
+- `{PM_RUN} commit` - interactive commit (commitizen)
 ````
 
 ### .mcp.json

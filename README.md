@@ -13,7 +13,7 @@ When invoked, the skill interactively creates a complete Next.js project with:
 - **Hybrid folder structure** — layer-based for global code, feature-based for domain
 - **CLAUDE.md** with rigid architecture rules for all future Claude sessions
 - **.mcp.json** with Context7 and optional MCPs
-- Optional extras: husky, commitlint, .editorconfig, VS Code settings, .env.example
+- Optional extras: husky, commitlint + commitizen (Conventional Commits), .editorconfig, VS Code settings, .env.example
 
 ## Installation
 
@@ -85,6 +85,7 @@ src/
 - Server Components by default, `"use client"` only when necessary
 - Path aliases (`@/`) for all imports
 - Feature isolation — each feature is self-contained
+- Conventional Commits enforced (`feat`, `fix`, `docs`, etc.) with commitizen interactive wizard
 
 ## Skills integration
 
